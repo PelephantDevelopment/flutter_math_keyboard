@@ -323,10 +323,10 @@ class _Buttons extends StatelessWidget {
                             label: config.label,
                             onTap: config.args != null
                                 ? () => controller.addFunction(
-                                      config.value,
+                                      ' ${config.value} ',
                                       config.args!,
                                     )
-                                : () => controller.addLeaf(config.value),
+                                : () => controller.addLeaf(' ${config.value} '),
                             asTex: config.asTex,
                             highlightLevel: config.highlighted ? 1 : 0,
                           )
