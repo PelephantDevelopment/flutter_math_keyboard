@@ -93,21 +93,21 @@ final _digitButtons = [
   for (var i = 0; i < 10; i++)
     BasicKeyboardButtonConfig(
       label: '$i',
-      value: '$i',
+      value: ' $i ',
       keyboardCharacters: ['$i'],
     ),
 ];
 
 const _decimalButton = BasicKeyboardButtonConfig(
   label: '.',
-  value: '.',
+  value: ' . ',
   keyboardCharacters: ['.', ','],
   highlighted: true,
 );
 
 const _subtractButton = BasicKeyboardButtonConfig(
   label: '−',
-  value: '-',
+  value: ' - ',
   keyboardCharacters: ['-'],
   highlighted: true,
 );
@@ -117,19 +117,19 @@ final functionKeyboard = [
   [
     const BasicKeyboardButtonConfig(
       label: r'\frac{\Box}{\Box}',
-      value: r'\frac',
+      value: r' \frac ',
       args: [TeXArg.braces, TeXArg.braces],
       asTex: true,
     ),
     const BasicKeyboardButtonConfig(
       label: r'\Box^2',
-      value: '^2',
+      value: ' ^2 ',
       args: [TeXArg.braces],
       asTex: true,
     ),
     const BasicKeyboardButtonConfig(
       label: r'\Box^{\Box}',
-      value: '^',
+      value: ' ^ ',
       args: [TeXArg.braces],
       asTex: true,
       keyboardCharacters: [
@@ -142,64 +142,64 @@ final functionKeyboard = [
     ),
     const BasicKeyboardButtonConfig(
       label: r'\sin',
-      value: r'\sin(',
+      value: r' \sin( ',
       asTex: true,
       keyboardCharacters: ['s'],
     ),
     const BasicKeyboardButtonConfig(
       label: r'\sin^{-1}',
-      value: r'\sin^{-1}(',
+      value: r' \sin^{-1}( ',
       asTex: true,
     ),
   ],
   [
     const BasicKeyboardButtonConfig(
       label: r'\sqrt{\Box}',
-      value: r'\sqrt',
+      value: r' \sqrt ',
       args: [TeXArg.braces],
       asTex: true,
       keyboardCharacters: ['r'],
     ),
     const BasicKeyboardButtonConfig(
       label: r'\sqrt[\Box]{\Box}',
-      value: r'\sqrt',
+      value: r' \sqrt ',
       args: [TeXArg.brackets, TeXArg.braces],
       asTex: true,
     ),
     const BasicKeyboardButtonConfig(
       label: r'\cos',
-      value: r'\cos(',
+      value: r' \cos( ',
       asTex: true,
       keyboardCharacters: ['c'],
     ),
     const BasicKeyboardButtonConfig(
       label: r'\cos^{-1}',
-      value: r'\cos^{-1}(',
+      value: r' \cos^{-1}( ',
       asTex: true,
     ),
   ],
   [
     const BasicKeyboardButtonConfig(
       label: r'\log_{\Box}(\Box)',
-      value: r'\log_',
+      value: r' \log_ ',
       asTex: true,
       args: [TeXArg.braces, TeXArg.parentheses],
     ),
     const BasicKeyboardButtonConfig(
       label: r'\ln(\Box)',
-      value: r'\ln(',
+      value: r' \ln( ',
       asTex: true,
       keyboardCharacters: ['l'],
     ),
     const BasicKeyboardButtonConfig(
       label: r'\tan',
-      value: r'\tan(',
+      value: r' \tan( ',
       asTex: true,
       keyboardCharacters: ['t'],
     ),
     const BasicKeyboardButtonConfig(
       label: r'\tan^{-1}',
-      value: r'\tan^{-1}(',
+      value: r' \tan^{-1}( ',
       asTex: true,
     ),
   ],
@@ -207,13 +207,13 @@ final functionKeyboard = [
     const PageButtonConfig(flex: 3),
     const BasicKeyboardButtonConfig(
       label: '(',
-      value: '(',
+      value: ' ( ',
       highlighted: true,
       keyboardCharacters: ['('],
     ),
     const BasicKeyboardButtonConfig(
       label: ')',
-      value: ')',
+      value: ' ) ',
       highlighted: true,
       keyboardCharacters: [')'],
     ),
@@ -231,13 +231,13 @@ final standardKeyboard = [
     _digitButtons[9],
     const BasicKeyboardButtonConfig(
       label: '×',
-      value: r'\cdot',
+      value: r' \cdot ',
       keyboardCharacters: ['*'],
       highlighted: true,
     ),
     const BasicKeyboardButtonConfig(
       label: '÷',
-      value: r'\frac',
+      value: r' \frac ',
       keyboardCharacters: ['/'],
       args: [TeXArg.braces, TeXArg.braces],
       highlighted: true,
@@ -249,7 +249,7 @@ final standardKeyboard = [
     _digitButtons[6],
     const BasicKeyboardButtonConfig(
       label: '+',
-      value: '+',
+      value: ' + ',
       keyboardCharacters: ['+'],
       highlighted: true,
     ),
