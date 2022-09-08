@@ -10,12 +10,12 @@ void main() {
   group('constants', () {
     test('pi', () {
       final node = convertMathExpressionToTeXNode(Parser().parse('$pi'));
-      expect(node.children[0].expression, r'{\pi}');
+      expect(node.children[0].expression, r'\pi');
     });
 
     test('e', () {
       final node = convertMathExpressionToTeXNode(Parser().parse('$e'));
-      expect(node.children[0].expression, r'{e}');
+      expect(node.children[0].expression, r'e');
     });
 
     test('pi2', () {
@@ -31,7 +31,7 @@ void main() {
     });
 
     test('e2', () {
-      const tex = '{x}+{e}^2';
+      const tex = 'x+e^2';
       const exp = 'x+$e^2';
       expect(
         TeXParser(convertMathExpressionToTeXNode(Parser().parse(exp))
