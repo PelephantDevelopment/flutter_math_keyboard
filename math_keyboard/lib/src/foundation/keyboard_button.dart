@@ -100,7 +100,7 @@ final _digitButtons = [
 
 const _decimalButton = BasicKeyboardButtonConfig(
   label: '.',
-  value: ' . ',
+  value: '.',
   keyboardCharacters: ['.', ','],
   highlighted: true,
 );
