@@ -93,7 +93,7 @@ final _digitButtons = [
   for (var i = 0; i < 10; i++)
     BasicKeyboardButtonConfig(
       label: '$i',
-      value: ' $i ',
+      value: '$i',
       keyboardCharacters: ['$i'],
     ),
 ];
