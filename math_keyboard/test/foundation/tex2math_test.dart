@@ -20,7 +20,7 @@ void main() {
     });
 
     test('e', () {
-      const tex = '{x}+{e}^2';
+      const tex = 'x+e^2';
       const exp = 'x+$e^2';
       expect(
         TeXParser(tex).parse().toString(),

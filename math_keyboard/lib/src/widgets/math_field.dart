@@ -398,11 +398,11 @@ class _MathFieldState extends State<MathField> with TickerProviderStateMixin {
 
     // Handle generally specified constants.
     if (lowerCaseCharacter == 'p') {
-      _controller.addLeaf(r'{\pi}');
+      _controller.addLeaf(r'\pi');
       return KeyEventResult.handled;
     }
     if (lowerCaseCharacter == 'e') {
-      _controller.addLeaf('{e}');
+      _controller.addLeaf('e');
       return KeyEventResult.handled;
     }
 
@@ -410,7 +410,7 @@ class _MathFieldState extends State<MathField> with TickerProviderStateMixin {
     for (final variable in widget.variables) {
       final startingCharacter = variable.substring(0, 1).toLowerCase();
       if (startingCharacter == lowerCaseCharacter) {
-        _controller.addLeaf('{$variable}');
+        _controller.addLeaf('$variable');
         return KeyEventResult.handled;
       }
     }
