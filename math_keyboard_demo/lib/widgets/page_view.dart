@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:math_expressions/math_expressions.dart';
@@ -225,8 +227,10 @@ class _PrimaryPage extends StatefulWidget {
 }
 
 class _PrimaryPageState extends State<_PrimaryPage> {
+  /*late final _expressionController = MathFieldEditingController()
+    ..updateValue(Parser().parse('f(x)'));*/
   late final _expressionController = MathFieldEditingController()
-    ..updateValue(Parser().parse('4.2 - (cos(x)/(x^3 - sin(x))) + e^(4^2)'));
+    ..updateValue(Parser().parse('x + sin(x)/3'));
   late final _numberController = MathFieldEditingController()
     ..updateValue(Parser().parse('42'));
 
@@ -274,6 +278,11 @@ class _PrimaryPageState extends State<_PrimaryPage> {
               filled: true,
               border: OutlineInputBorder(),
             ),
+            variables: ['x', 'i', 'f', '=', "'"],
+            onChanged: (value) {
+              log(value);
+              print(_expressionController.root);
+            },
           ),
         ),
         Padding(
@@ -925,16 +934,19 @@ class _MathExpressionsPageState extends State<_MathExpressionsPage> {
             child: MathField(
               controller: _expressionController,
               onChanged: (tex) {
+                //tex = "{f}{'} ( {x} ) {=}((\frac{({x}^{2})}{2})+1)";
                 try {
                   _expression = TeXParser(tex).parse();
                   _calculateResult();
-                } catch (_) {}
+                } catch (_) {
+                  print("TeXParser error");
+                }
 
                 setState(() {
                   _tex = tex;
                 });
               },
-              variables: ['x'],
+              variables: ['x', 'i', 'f', '=', "'"],
               decoration: InputDecoration(
                 labelText: 'Expression field',
                 filled: true,
@@ -949,7 +961,7 @@ class _MathExpressionsPageState extends State<_MathExpressionsPage> {
             left: 32,
             right: 32,
           ),
-          child: Text(
+          child: SelectableText(
             'TeX: ${_tex ?? 'waiting for input'}',
             textAlign: TextAlign.center,
           ),
@@ -960,7 +972,7 @@ class _MathExpressionsPageState extends State<_MathExpressionsPage> {
             left: 32,
             right: 32,
           ),
-          child: Text(
+          child: SelectableText(
             'Math expression: $_expression',
             textAlign: TextAlign.center,
           ),
