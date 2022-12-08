@@ -67,6 +67,16 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
           [convertMathExpressionToTeXNode(mathExpression.second)],
         ),
       ];
+    } else if (mathExpression is Subscript) {
+      result = [
+        ..._convertToTeX(mathExpression.first, parent),
+        TeXFunction(
+          '_',
+          parent,
+          const [TeXArg.braces],
+          [convertMathExpressionToTeXNode(mathExpression.second)],
+        ),
+      ];
     }
     if (result == null) {
       // Note that modulo is unsupported.
