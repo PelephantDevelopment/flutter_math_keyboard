@@ -199,21 +199,21 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
     }
     if (mathExpression is SinEx) {
       return [
-        TeXLeaf(r'\sin^{' + mathExpression.exponent.toString() + '}('),
+        TeXLeaf(r'\sin^{' + /*mathExpression.exponent*/ 2.toString() + '}('),
         ..._convertToTeX(mathExpression.arg, parent),
         const TeXLeaf(')'),
       ];
     }
     if (mathExpression is CosEx) {
       return [
-        TeXLeaf(r'\cos^{' + mathExpression.exponent.toString() + '}('),
+        TeXLeaf(r'\cos^{' + /*mathExpression.exponent*/ 2.toString() + '}('),
         ..._convertToTeX(mathExpression.arg, parent),
         const TeXLeaf(')'),
       ];
     }
     if (mathExpression is TanEx) {
       return [
-        TeXLeaf(r'\tan^{' + mathExpression.exponent.toString() + '}('),
+        TeXLeaf(r'\tan^{' + /*mathExpression.exponent*/ 2.toString() + '}('),
         ..._convertToTeX(mathExpression.arg, parent),
         const TeXLeaf(')'),
       ];
