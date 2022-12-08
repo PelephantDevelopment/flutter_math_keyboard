@@ -142,16 +142,22 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
         ),
       ];
     }
+    if (mathExpression is Lim) {
+      return [
+        TeXFunction(
+          r'\lim_',
+          parent,
+          const [TeXArg.braces, TeXArg.parentheses],
+          [
+            convertMathExpressionToTeXNode(mathExpression.base),
+            convertMathExpressionToTeXNode(mathExpression.arg),
+          ],
+        ),
+      ];
+    }
     if (mathExpression is Ln) {
       return [
         const TeXLeaf(r'\ln('),
-        ..._convertToTeX(mathExpression.arg, parent),
-        const TeXLeaf(')'),
-      ];
-    }
-    if (mathExpression is Lim) {
-      return [
-        const TeXLeaf(r'\lim('),
         ..._convertToTeX(mathExpression.arg, parent),
         const TeXLeaf(')'),
       ];
