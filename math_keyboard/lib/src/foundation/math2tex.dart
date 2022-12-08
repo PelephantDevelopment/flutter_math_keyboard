@@ -139,6 +139,13 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
         const TeXLeaf(')'),
       ];
     }
+    if (mathExpression is Lim) {
+      return [
+        const TeXLeaf(r'\lim('),
+        ..._convertToTeX(mathExpression.arg, parent),
+        const TeXLeaf(')'),
+      ];
+    }
     if (mathExpression is Root) {
       if (mathExpression.n == 2) {
         return [
@@ -186,6 +193,27 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
     if (mathExpression is Tan) {
       return [
         const TeXLeaf(r'\tan('),
+        ..._convertToTeX(mathExpression.arg, parent),
+        const TeXLeaf(')'),
+      ];
+    }
+    if (mathExpression is SinEx) {
+      return [
+        TeXLeaf(r'\sin^{' + mathExpression.exponent.toString() + '}('),
+        ..._convertToTeX(mathExpression.arg, parent),
+        const TeXLeaf(')'),
+      ];
+    }
+    if (mathExpression is CosEx) {
+      return [
+        TeXLeaf(r'\cos^{' + mathExpression.exponent.toString() + '}('),
+        ..._convertToTeX(mathExpression.arg, parent),
+        const TeXLeaf(')'),
+      ];
+    }
+    if (mathExpression is TanEx) {
+      return [
+        TeXLeaf(r'\tan^{' + mathExpression.exponent.toString() + '}('),
         ..._convertToTeX(mathExpression.arg, parent),
         const TeXLeaf(')'),
       ];
