@@ -141,26 +141,25 @@ final functionKeyboard = [
       ],
     ),
     const BasicKeyboardButtonConfig(
-      label: r'\Box_{\Box}',
-      value: ' _ ',
-      args: [TeXArg.braces],
-      asTex: true,
-      keyboardCharacters: [
-        '_',
-        // This is a workaround for keyboard layout that use _ as a toggle key.
-        //TODO: workaround must be found like in superscript ^ button
-        'Dead',
-      ],
-    ),
-    const BasicKeyboardButtonConfig(
       label: r'\sin',
       value: r' \sin( ',
       asTex: true,
       keyboardCharacters: ['s'],
     ),
     const BasicKeyboardButtonConfig(
+      label: r'\sin^{2}',
+      value: r' \sin^{2}( ',
+      asTex: true,
+      keyboardCharacters: ['s'],
+    ),
+    const BasicKeyboardButtonConfig(
       label: r'\sin^{-1}',
       value: r' \sin^{-1}( ',
+      asTex: true,
+    ),
+    const BasicKeyboardButtonConfig(
+      label: r'\int',
+      value: r' \int ',
       asTex: true,
     ),
   ],
@@ -179,10 +178,27 @@ final functionKeyboard = [
       asTex: true,
     ),
     const BasicKeyboardButtonConfig(
+      label: r'\Box_{\Box}',
+      value: ' _ ',
+      args: [TeXArg.braces],
+      asTex: true,
+      keyboardCharacters: [
+        '_',
+        // This is a workaround for keyboard layout that use _ as a toggle key.
+        //TODO: workaround must be found like in superscript ^ button
+        'Dead',
+      ],
+    ),
+    const BasicKeyboardButtonConfig(
       label: r'\cos',
       value: r' \cos( ',
       asTex: true,
       keyboardCharacters: ['c'],
+    ),
+    const BasicKeyboardButtonConfig(
+      label: r'\cos^{2}',
+      value: r' \cos^{2}( ',
+      asTex: true,
     ),
     const BasicKeyboardButtonConfig(
       label: r'\cos^{-1}',
@@ -204,8 +220,20 @@ final functionKeyboard = [
       keyboardCharacters: ['l'],
     ),
     const BasicKeyboardButtonConfig(
+      label: r'\lim_{\Box}(\Box)',
+      value: r' \lim_ ',
+      asTex: true,
+      args: [TeXArg.braces, TeXArg.parentheses],
+    ),
+    const BasicKeyboardButtonConfig(
       label: r'\tan',
       value: r' \tan( ',
+      asTex: true,
+      keyboardCharacters: ['t'],
+    ),
+    const BasicKeyboardButtonConfig(
+      label: r'\tan^{2}',
+      value: r' \tan^{2}( ',
       asTex: true,
       keyboardCharacters: ['t'],
     ),
