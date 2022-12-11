@@ -162,6 +162,13 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
         const TeXLeaf(')'),
       ];
     }
+    if (mathExpression is Integral) {
+      return [
+        const TeXLeaf(r'\int('),
+        ..._convertToTeX(mathExpression.arg, parent),
+        const TeXLeaf(')'),
+      ];
+    }
     if (mathExpression is Root) {
       if (mathExpression.n == 2) {
         return [

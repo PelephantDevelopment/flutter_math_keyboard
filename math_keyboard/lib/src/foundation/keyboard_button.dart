@@ -158,8 +158,8 @@ final functionKeyboard = [
       asTex: true,
     ),
     const BasicKeyboardButtonConfig(
-      label: r'\int',
-      value: r' \int ',
+      label: r'\int(\Box)',
+      value: r' \int( ',
       asTex: true,
     ),
   ],
