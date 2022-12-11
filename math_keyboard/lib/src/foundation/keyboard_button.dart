@@ -162,6 +162,10 @@ final functionKeyboard = [
       value: r' \int( ',
       asTex: true,
     ),
+    const BasicKeyboardButtonConfig(
+      label: '∞',
+      value: r' \infty ',
+    ),
   ],
   [
     const BasicKeyboardButtonConfig(
@@ -205,6 +209,14 @@ final functionKeyboard = [
       value: r' \cos^{-1}( ',
       asTex: true,
     ),
+    const BasicKeyboardButtonConfig(
+      label: '→',
+      value: r' \rightarrow ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: '←',
+      value: r' \leftarrow ',
+    ),
   ],
   [
     const BasicKeyboardButtonConfig(
@@ -241,6 +253,10 @@ final functionKeyboard = [
       label: r'\tan^{-1}',
       value: r' \tan^{-1}( ',
       asTex: true,
+    ),
+    const BasicKeyboardButtonConfig(
+      label: '±',
+      value: r' \pm ',
     ),
   ],
   [
