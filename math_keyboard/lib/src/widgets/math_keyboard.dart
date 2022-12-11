@@ -466,10 +466,11 @@ class _BasicButton extends StatelessWidget {
       child: result,
     );
 
-    return Expanded(
+    return /*Expanded(
       flex: flex ?? 2,
-      child: result,
-    );
+      child:*/
+        result; //,
+    //);
   }
 }
 
@@ -498,19 +499,20 @@ class _NavigationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return /*Expanded(
       flex: flex ?? 2,
-      child: KeyboardButton(
-        onTap: onTap,
-        onHold: onTap,
-        color: Colors.grey[900],
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: iconSize,
-        ),
+      child: */
+        KeyboardButton(
+      onTap: onTap,
+      onHold: onTap,
+      color: Colors.grey[900],
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: iconSize,
       ),
-    );
+    ); //,
+    //);
   }
 }
 
