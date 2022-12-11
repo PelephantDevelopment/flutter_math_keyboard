@@ -67,6 +67,24 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
           [convertMathExpressionToTeXNode(mathExpression.second)],
         ),
       ];
+    } else if (mathExpression is PlusMinus) {
+      result = [
+        ..._convertToTeX(mathExpression.first, parent),
+        const TeXLeaf(r'\pm'),
+        ..._convertToTeX(mathExpression.second, parent),
+      ];
+    } else if (mathExpression is ArrowLeft) {
+      result = [
+        ..._convertToTeX(mathExpression.first, parent),
+        const TeXLeaf(r'\leftarrow'),
+        ..._convertToTeX(mathExpression.second, parent),
+      ];
+    } else if (mathExpression is ArrowRight) {
+      result = [
+        ..._convertToTeX(mathExpression.first, parent),
+        const TeXLeaf(r'\rightarrow'),
+        ..._convertToTeX(mathExpression.second, parent),
+      ];
     } else if (mathExpression is Subscript) {
       result = [
         ..._convertToTeX(mathExpression.first, parent),
