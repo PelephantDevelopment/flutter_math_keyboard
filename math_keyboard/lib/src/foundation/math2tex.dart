@@ -85,6 +85,12 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
         const TeXLeaf(r'\rightarrow'),
         ..._convertToTeX(mathExpression.second, parent),
       ];
+    } else if (mathExpression is Equation) {
+      result = [
+        ..._convertToTeX(mathExpression.first, parent),
+        const TeXLeaf(r'= '),
+        ..._convertToTeX(mathExpression.second, parent),
+      ];
     } else if (mathExpression is Subscript) {
       result = [
         ..._convertToTeX(mathExpression.first, parent),
