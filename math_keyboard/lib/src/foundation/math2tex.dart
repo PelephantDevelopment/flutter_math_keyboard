@@ -85,6 +85,12 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
         const TeXLeaf(r'\rightarrow'),
         ..._convertToTeX(mathExpression.second, parent),
       ];
+    } else if (mathExpression is ArrowLeftRight) {
+      result = [
+        ..._convertToTeX(mathExpression.first, parent),
+        const TeXLeaf(r'\leftrightarrow'),
+        ..._convertToTeX(mathExpression.second, parent),
+      ];
     } else if (mathExpression is Equation) {
       result = [
         ..._convertToTeX(mathExpression.first, parent),
@@ -240,6 +246,13 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
     if (mathExpression is Tan) {
       return [
         const TeXLeaf(r'\tan('),
+        ..._convertToTeX(mathExpression.arg, parent),
+        const TeXLeaf(')'),
+      ];
+    }
+    if (mathExpression is Sec) {
+      return [
+        const TeXLeaf(r'\sec('),
         ..._convertToTeX(mathExpression.arg, parent),
         const TeXLeaf(')'),
       ];

@@ -217,6 +217,10 @@ final functionKeyboard = [
       label: '←',
       value: r' \leftarrow ',
     ),
+    const BasicKeyboardButtonConfig(
+      label: '↔',
+      value: r' \leftrightarrow ',
+    ),
   ],
   [
     const BasicKeyboardButtonConfig(
