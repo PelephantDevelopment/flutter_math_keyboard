@@ -69,6 +69,21 @@ class TeXNode {
     return NavigationState.success;
   }
 
+  /// Set courser to index.
+  NavigationState shiftCursorToIndex(int oldIndex, int index) {
+    removeCursor();
+    courserPosition = index;
+    if (courserPosition >= children.length) {
+      courserPosition = oldIndex;
+      return NavigationState.end;
+    }
+    if (children[courserPosition] is TeXFunction) {
+      return NavigationState.func;
+    }
+    setCursor();
+    return NavigationState.success;
+  }
+
   /// Adds a new node.
   void addTeX(TeX teX) {
     children.insert(courserPosition, teX);

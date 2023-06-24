@@ -16,9 +16,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  flutter_math_fork: ^0.6.3+1
+  #flutter_math_fork: ^0.6.3+1
+  flutter_math_fork:
+    git:
+      url: https://github.com/PelephantDevelopment/flutter_math_fork
+      ref: 5c5037541c9d3af86a800f5ebb80e410a4ab06ec
   holding_gesture: ^1.1.0
-  intl: ^0.17.0
+  intl: ^0.18.0
   #math_expressions: ^2.1.0
   math_expressions:
     git:

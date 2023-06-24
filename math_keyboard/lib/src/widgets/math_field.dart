@@ -602,6 +602,13 @@ class _FieldPreview extends StatelessWidget {
                     : Offset(-1, 0),
                 child: Math.tex(
                   tex,
+                  onTap: (index) {
+                    print(index);
+                    controller.goToIndex(
+                        0,
+                        index ??
+                            1); //TODO: why are positions deleted sometimes? fix clicking on end nodes issue /
+                  },
                   options: MathOptions(
                     fontSize: MathOptions.defaultFontSize,
                     color: Theme.of(context).colorScheme.onSurface,
@@ -718,6 +725,50 @@ class MathFieldEditingController extends ChangeNotifier {
   /// Navigate to the next node.
   void goNext() {
     final state = currentNode.shiftCursorRight();
+    switch (state) {
+      // CASE 1: Courser was moved 1 position to the right in the current node.
+      case NavigationState.success:
+        notifyListeners();
+        return;
+      // CASE 2: The upcoming tex is a function.
+      // We want to step in this function rather than skipping it.
+      case NavigationState.func:
+        final pos = currentNode.courserPosition - 1;
+        currentNode = (currentNode.children[pos] as TeXFunction).argNodes.first;
+        currentNode.courserPosition = 0;
+        currentNode.setCursor();
+        notifyListeners();
+        return;
+      // CASE 3: The courser is already at the end of this node.
+      case NavigationState.end:
+        // If the current node is the root, we can't navigate further.
+        if (currentNode.parent == null) {
+          return;
+        }
+        // Otherwise, the current node must be a function argument.
+        currentNode.removeCursor();
+        final parent = currentNode.parent!;
+        final nextArg = parent.argNodes.indexOf(currentNode) + 1;
+        // If the parent function has another argument after this one,
+        // we jump into that, otherwise we position the courser right
+        // after the function.
+        if (nextArg >= parent.argNodes.length) {
+          currentNode = parent.parent;
+          currentNode.courserPosition =
+              currentNode.children.indexOf(parent) + 1;
+          currentNode.setCursor();
+        } else {
+          currentNode = currentNode.parent!.argNodes[nextArg];
+          currentNode.courserPosition = 0;
+          currentNode.setCursor();
+        }
+        notifyListeners();
+    }
+  }
+
+  /// Navigate to the indexed node.
+  void goToIndex(int oldIndex, int index) {
+    final state = currentNode.shiftCursorToIndex(oldIndex, index);
     switch (state) {
       // CASE 1: Courser was moved 1 position to the right in the current node.
       case NavigationState.success:
