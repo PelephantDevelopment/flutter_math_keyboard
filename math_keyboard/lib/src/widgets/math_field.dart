@@ -769,50 +769,52 @@ class MathFieldEditingController extends ChangeNotifier {
 
   /// Navigate to the indexed node.
   void goToIndex(List<ClickOnCharTracker> trackerList) {
-    /*final state =*/ currentNode.shiftCursorToIndex(trackerList);
+    int courserIndex = 0;
+    // /*final state =*/ currentNode.shiftCursorToIndex(trackerList);
+
+    trackerList = trackerList.reversed.toList();
+    for (var element in trackerList) {
+      print("-----------");
+      print(element.index);
+      print(element.parent);
+      print("-----------");
+    }
+    // TODO: navigate cursor to correct node
+
+    int oldIndex = currentNode.removeCursor();
+    int oldHashCode = currentNode.hashCode;
+
+    // jump to highest level node without parent
+    while (currentNode.parent != null) {
+      currentNode = currentNode.parent!.parent;
+    }
+
+    for (var i = 0; i < trackerList.length; i++) {
+      ClickOnCharTracker element = trackerList[i];
+      int indexOffset =
+          0; // offset to care for the old cursor that has been deleted and hence switched the child indices after him by one
+
+      if (currentNode.hashCode == oldHashCode) {
+        if ((element.index ?? 0) > oldIndex) {
+          indexOffset = -1;
+        }
+      }
+
+      if (i == trackerList.length - 1) {
+        // set courserPosition
+        courserIndex = (element.index ?? 0) + indexOffset;
+        currentNode.setCursorToIndex(courserIndex);
+      } else {
+        //TODO: go down one child (until we are on the level of the child where the cursor is placed)
+        currentNode = (currentNode.children[(element.index ?? 0) + indexOffset]
+                as TeXFunction)
+            .argNodes[trackerList[i + 1].index ?? 0];
+        i++;
+      }
+    }
+
     notifyListeners();
     return;
-    /*switch (state) {
-      // CASE 1: Courser was moved 1 position to the right in the current node.
-      case NavigationState.success:
-        notifyListeners();
-        return;
-      // CASE 2: The upcoming tex is a function.
-      // We want to step in this function rather than skipping it.
-      case NavigationState.func:
-      /*final pos = currentNode.courserPosition - 1;
-        currentNode = (currentNode.children[pos] as TeXFunction).argNodes.first;
-        currentNode.courserPosition = 0;
-        currentNode.setCursor();
-        notifyListeners();
-        return;*/
-      // CASE 3: The courser is already at the end of this node.
-      case NavigationState.end:
-      /*// If the current node is the root, we can't navigate further.
-        if (currentNode.parent == null) {
-          return;
-        }
-        // Otherwise, the current node must be a function argument.
-        currentNode.removeCursor();
-        final parent = currentNode.parent!;
-        final nextArg = parent.argNodes.indexOf(currentNode) + 1;
-        // If the parent function has another argument after this one,
-        // we jump into that, otherwise we position the courser right
-        // after the function.
-        if (nextArg >= parent.argNodes.length) {
-          currentNode = parent.parent;
-          currentNode.courserPosition =
-              currentNode.children.indexOf(parent) + 1;
-          currentNode.setCursor();
-        } else {
-          currentNode = currentNode.parent!.argNodes[nextArg];
-          currentNode.courserPosition = 0;
-          currentNode.setCursor();
-        }
-        notifyListeners();*/
-    }
-    notifyListeners();
-    return;*/
   }
 
   /// Add leaf to the current node.

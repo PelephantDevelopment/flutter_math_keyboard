@@ -72,50 +72,9 @@ class TeXNode {
   }
 
   /// Set courser to index.
-  NavigationState shiftCursorToIndex(List<ClickOnCharTracker> trackerList) {
-    for (var element in trackerList) {
-      print("-----------");
-      print(element.index);
-      print(element.parent);
-      print("-----------");
-    }
-    // TODO: navigate cursor to correct node
-
-    int oldIndex = removeCursor();
-
-    //TODO: jump to highest level node without parent
-
-    for (var i = 0; i < trackerList.length; i++) {
-      ClickOnCharTracker element = trackerList[i];
-
-      if (i == trackerList.length - 1) {
-        //TODO: set courserPosition
-        courserPosition = element.index ?? 0;
-      } else {
-        //TODO: go as many childs down as needed
-      }
-    }
-
-    /*int oldIndex = removeCursor();
-    if (index > oldIndex) {
-      index--;
-    }
+  setCursorToIndex(int index) {
     courserPosition = index;
-    if (courserPosition == children.length) {
-      setCursor();
-      return NavigationState.success;
-    }
-    if (courserPosition > children.length) {
-      courserPosition = oldIndex;
-      return NavigationState.end;
-    }
-    /*if (children[courserPosition] is TeXFunction) {
-      return NavigationState.func;
-    }*/
-    setCursor();*/
-
     setCursor();
-    return NavigationState.success;
   }
 
   /// Adds a new node.
