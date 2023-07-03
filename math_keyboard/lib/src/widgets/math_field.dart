@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -795,6 +797,7 @@ class MathFieldEditingController extends ChangeNotifier {
           0; // offset to care for the old cursor that has been deleted and hence switched the child indices after him by one
 
       if (currentNode.hashCode == oldHashCode) {
+        // get index offset
         if ((element.index ?? 0) > oldIndex) {
           indexOffset = -1;
         }
@@ -805,11 +808,19 @@ class MathFieldEditingController extends ChangeNotifier {
         courserIndex = (element.index ?? 0) + indexOffset;
         currentNode.setCursorToIndex(courserIndex);
       } else {
-        //TODO: go down one child (until we are on the level of the child where the cursor is placed)
-        currentNode = (currentNode.children[(element.index ?? 0) + indexOffset]
-                as TeXFunction)
-            .argNodes[trackerList[i + 1].index ?? 0];
-        i++;
+        // go down one child (until we are on the level of the child where the cursor is placed)
+        try {
+          currentNode = (currentNode
+                  .children[(element.index ?? 0) + indexOffset] as TeXFunction)
+              .argNodes[trackerList[i + 1].index ?? 0];
+          i++;
+        } catch (e) {
+          log(e.toString());
+          // happens when clicking on a letter instead of number which somehow triggers another onTap event
+          courserIndex = (trackerList[i].index ?? 0) + indexOffset;
+          currentNode.setCursorToIndex(courserIndex);
+          break;
+        }
       }
     }
 
