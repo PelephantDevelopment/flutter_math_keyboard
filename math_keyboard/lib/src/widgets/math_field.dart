@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
+import 'package:flutter_math_fork/global_custom/global_data.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:math_keyboard/src/foundation/keyboard_button.dart';
 import 'package:math_keyboard/src/foundation/math2tex.dart';
@@ -602,12 +603,12 @@ class _FieldPreview extends StatelessWidget {
                     : Offset(-1, 0),
                 child: Math.tex(
                   tex,
-                  onTap: (index) {
-                    print(index);
+                  onTap: (index, parent, trackerList) {
+                    /*print(index);
+                    print(parent);
+                    print(trackerList);*/
                     controller.goToIndex(
-                        0,
-                        index ??
-                            1); //TODO: why are positions deleted sometimes? fix clicking on end nodes issue /
+                        trackerList); //TODO: why are positions deleted sometimes? fix clicking on end nodes issue /
                   },
                   options: MathOptions(
                     fontSize: MathOptions.defaultFontSize,
@@ -767,9 +768,11 @@ class MathFieldEditingController extends ChangeNotifier {
   }
 
   /// Navigate to the indexed node.
-  void goToIndex(int oldIndex, int index) {
-    final state = currentNode.shiftCursorToIndex(oldIndex, index);
-    switch (state) {
+  void goToIndex(List<ClickOnCharTracker> trackerList) {
+    /*final state =*/ currentNode.shiftCursorToIndex(trackerList);
+    notifyListeners();
+    return;
+    /*switch (state) {
       // CASE 1: Courser was moved 1 position to the right in the current node.
       case NavigationState.success:
         notifyListeners();
@@ -777,15 +780,15 @@ class MathFieldEditingController extends ChangeNotifier {
       // CASE 2: The upcoming tex is a function.
       // We want to step in this function rather than skipping it.
       case NavigationState.func:
-        final pos = currentNode.courserPosition - 1;
+      /*final pos = currentNode.courserPosition - 1;
         currentNode = (currentNode.children[pos] as TeXFunction).argNodes.first;
         currentNode.courserPosition = 0;
         currentNode.setCursor();
         notifyListeners();
-        return;
+        return;*/
       // CASE 3: The courser is already at the end of this node.
       case NavigationState.end:
-        // If the current node is the root, we can't navigate further.
+      /*// If the current node is the root, we can't navigate further.
         if (currentNode.parent == null) {
           return;
         }
@@ -806,8 +809,10 @@ class MathFieldEditingController extends ChangeNotifier {
           currentNode.courserPosition = 0;
           currentNode.setCursor();
         }
-        notifyListeners();
+        notifyListeners();*/
     }
+    notifyListeners();
+    return;*/
   }
 
   /// Add leaf to the current node.

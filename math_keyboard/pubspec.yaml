@@ -20,7 +20,7 @@ dependencies:
   flutter_math_fork:
     git:
       url: https://github.com/PelephantDevelopment/flutter_math_fork
-      ref: 5c5037541c9d3af86a800f5ebb80e410a4ab06ec
+      ref: b05c6cb18cda5b19f32b448c891003d54300f854
   holding_gesture: ^1.1.0
   intl: ^0.18.0
   #math_expressions: ^2.1.0

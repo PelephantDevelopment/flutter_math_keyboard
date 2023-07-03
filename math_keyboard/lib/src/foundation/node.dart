@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_math_fork/global_custom/global_data.dart';
 
 /// Block representing a node of TeX.
 class TeXNode {
@@ -22,8 +23,9 @@ class TeXNode {
   }
 
   /// Removes the courser.
-  void removeCursor() {
+  int removeCursor() {
     children.removeAt(courserPosition);
+    return courserPosition;
   }
 
   /// Returns whether the last child node is the cursor.
@@ -70,16 +72,48 @@ class TeXNode {
   }
 
   /// Set courser to index.
-  NavigationState shiftCursorToIndex(int oldIndex, int index) {
-    removeCursor();
+  NavigationState shiftCursorToIndex(List<ClickOnCharTracker> trackerList) {
+    for (var element in trackerList) {
+      print("-----------");
+      print(element.index);
+      print(element.parent);
+      print("-----------");
+    }
+    // TODO: navigate cursor to correct node
+
+    int oldIndex = removeCursor();
+
+    //TODO: jump to highest level node without parent
+
+    for (var i = 0; i < trackerList.length; i++) {
+      ClickOnCharTracker element = trackerList[i];
+
+      if (i == trackerList.length - 1) {
+        //TODO: set courserPosition
+        courserPosition = element.index ?? 0;
+      } else {
+        //TODO: go as many childs down as needed
+      }
+    }
+
+    /*int oldIndex = removeCursor();
+    if (index > oldIndex) {
+      index--;
+    }
     courserPosition = index;
-    if (courserPosition >= children.length) {
+    if (courserPosition == children.length) {
+      setCursor();
+      return NavigationState.success;
+    }
+    if (courserPosition > children.length) {
       courserPosition = oldIndex;
       return NavigationState.end;
     }
-    if (children[courserPosition] is TeXFunction) {
+    /*if (children[courserPosition] is TeXFunction) {
       return NavigationState.func;
-    }
+    }*/
+    setCursor();*/
+
     setCursor();
     return NavigationState.success;
   }
