@@ -278,6 +278,13 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
         const TeXLeaf(')'),
       ];
     }
+    if (mathExpression is SecEx) {
+      return [
+        TeXLeaf(r'\sec^{' + /*mathExpression.exponent*/ 2.toString() + '}('),
+        ..._convertToTeX(mathExpression.arg, parent),
+        const TeXLeaf(')'),
+      ];
+    }
     if (mathExpression is Asin) {
       return [
         const TeXLeaf(r'\sin^{-1}('),
@@ -295,6 +302,13 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
     if (mathExpression is Atan) {
       return [
         const TeXLeaf(r'\tan^{-1}('),
+        ..._convertToTeX(mathExpression.arg, parent),
+        const TeXLeaf(')'),
+      ];
+    }
+    if (mathExpression is Asec) {
+      return [
+        const TeXLeaf(r'\sec^{-1}('),
         ..._convertToTeX(mathExpression.arg, parent),
         const TeXLeaf(')'),
       ];

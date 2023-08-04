@@ -27,7 +27,7 @@ dependencies:
   math_expressions:
     git:
       url: https://github.com/PelephantDevelopment/math-expressions
-      ref: b9c2f2beea493fc10e51fb8849b09439f6290797
+      ref: 312d3d8645cde3534a76f6a92aa2a170f923ae83
   petitparser: ^5.0.0
 
 dev_dependencies:
