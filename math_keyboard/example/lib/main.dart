@@ -128,7 +128,20 @@ class _MathFieldTextFieldExample extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16),
             child: MathField(
-              variables: const ['a', 's', 'c'],
+              variables: const [
+                'a',
+                's',
+                'c',
+                'a',
+                's',
+                'c',
+                'a',
+                's',
+                'c',
+                'a',
+                's',
+                'c',
+              ],
               onChanged: (value) {
                 String expression;
                 try {

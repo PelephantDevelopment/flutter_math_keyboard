@@ -225,7 +225,7 @@ class _KeyboardBodyState extends State<_KeyboardBody> {
 /// Widget showing the variables a user can use.
 class _Variables extends StatelessWidget {
   /// Constructs a [_Variables] Widget.
-  const _Variables({
+  _Variables({
     Key? key,
     required this.controller,
     required this.variables,
@@ -238,6 +238,8 @@ class _Variables extends StatelessWidget {
   /// The variables to show.
   final List<String> variables;
 
+  final ScrollController scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -246,27 +248,33 @@ class _Variables extends StatelessWidget {
       child: AnimatedBuilder(
         animation: controller,
         builder: (context, child) {
-          return ListView.separated(
-            itemCount: variables.length,
-            scrollDirection: Axis.horizontal,
-            separatorBuilder: (context, index) {
-              return Center(
-                child: Container(
-                  height: 24,
-                  width: 1,
-                  color: Colors.white,
-                ),
-              );
-            },
-            itemBuilder: (context, index) {
-              return SizedBox(
-                width: 56,
-                child: _VariableButton(
-                  name: variables[index],
-                  onTap: () => controller.addLeaf('{${variables[index]}}'),
-                ),
-              );
-            },
+          return Scrollbar(
+            isAlwaysShown: true,
+            controller: scrollController,
+            scrollbarOrientation: ScrollbarOrientation.bottom,
+            child: ListView.separated(
+              controller: scrollController,
+              itemCount: variables.length,
+              scrollDirection: Axis.horizontal,
+              separatorBuilder: (context, index) {
+                return Center(
+                  child: Container(
+                    height: 24,
+                    width: 1,
+                    color: Colors.white,
+                  ),
+                );
+              },
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  width: 56,
+                  child: _VariableButton(
+                    name: variables[index],
+                    onTap: () => controller.addLeaf('{${variables[index]}}'),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
