@@ -285,7 +285,7 @@ class _Variables extends StatelessWidget {
 /// Widget displaying the buttons.
 class _Buttons extends StatelessWidget {
   /// Constructs a [_Buttons] Widget.
-  const _Buttons({
+  _Buttons({
     Key? key,
     required this.controller,
     this.page1,
@@ -307,6 +307,8 @@ class _Buttons extends StatelessWidget {
   ///
   /// Can be `null`.
   final VoidCallback? onSubmit;
+
+  final ScrollController scrollController = ScrollController();
 
   Widget _getButton(config) {
     if (config is BasicKeyboardButtonConfig) {
@@ -370,27 +372,33 @@ class _Buttons extends StatelessWidget {
         builder: (context, child) {
           final layout =
               controller.secondPage ? page2! : page1 ?? numberKeyboard;
-          return SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final row in layout)
-                  SizedBox(
-                    height: 56,
-                    child: Row(
-                      children: [
-                        for (final config in row)
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minWidth: 65,
-                            ),
-                            child: _getButton(config),
-                          )
-                      ],
+          return Scrollbar(
+            isAlwaysShown: true,
+            controller: scrollController,
+            scrollbarOrientation: ScrollbarOrientation.bottom,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              controller: scrollController,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (final row in layout)
+                    SizedBox(
+                      height: 56,
+                      child: Row(
+                        children: [
+                          for (final config in row)
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: 65,
+                              ),
+                              child: _getButton(config),
+                            )
+                        ],
+                      ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           );
         },
