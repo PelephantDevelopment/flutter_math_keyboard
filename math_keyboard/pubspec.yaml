@@ -1,5 +1,5 @@
 name: math_keyboard
-description: >-2
+description: >2-
   Math expression editing using an on-screen software keyboard or physical keyboard input in a
   typeset input field in Flutter.
 version: 0.1.7
@@ -7,8 +7,8 @@ homepage: https://github.com/simpleclub/math_keyboard/tree/main/math_keyboard
 publish_to: none
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: '>=2.0.0'
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
 
 dependencies:
   flutter:
@@ -20,7 +20,7 @@ dependencies:
   flutter_math_fork:
     git:
       url: https://github.com/PelephantDevelopment/flutter_math_fork
-      ref: b05c6cb18cda5b19f32b448c891003d54300f854
+      ref: 5055bc14ba604410daa29e7b950d500c9d0679a0
   holding_gesture: ^1.1.0
   intl: ^0.18.0
   #math_expressions: ^2.1.0
@@ -38,6 +38,6 @@ dev_dependencies:
 
 flutter:
   fonts:
-  - family: CustomKeyIcons
-    fonts:
-    - asset: fonts/CustomKeyIcons.ttf
+    - family: CustomKeyIcons
+      fonts:
+        - asset: fonts/CustomKeyIcons.ttf

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
@@ -69,61 +71,67 @@ class MathKeyboard extends StatelessWidget {
       curve: Curves.ease,
     );
 
-    return SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(0, 1),
-        end: const Offset(0, 0),
-      ).animate(curvedSlideAnimation),
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Material(
-              type: MaterialType.transparency,
-              child: ColoredBox(
-                color: Colors.black,
-                child: SafeArea(
-                  top: false,
-                  child: _KeyboardBody(
-                    insetsState: insetsState,
-                    slideAnimation:
-                        slideAnimation == null ? null : curvedSlideAnimation,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 4,
-                        left: 4,
-                        right: 4,
-                      ),
-                      child: Center(
-                        child: ConstrainedBox(
-                          constraints: const BoxConstraints(
-                            maxWidth: 5e2,
-                          ),
-                          child: Column(
-                            children: [
-                              if (type != MathKeyboardType.numberOnly)
-                                _Variables(
-                                  controller: controller,
-                                  variables: variables,
+    return WillPopScope(
+      onWillPop: () async {
+        log("would have pop");
+        return false;
+      },
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0, 1),
+          end: const Offset(0, 0),
+        ).animate(curvedSlideAnimation),
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Material(
+                type: MaterialType.transparency,
+                child: ColoredBox(
+                  color: Colors.black,
+                  child: SafeArea(
+                    top: false,
+                    child: _KeyboardBody(
+                      insetsState: insetsState,
+                      slideAnimation:
+                          slideAnimation == null ? null : curvedSlideAnimation,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 4,
+                          left: 4,
+                          right: 4,
+                        ),
+                        child: Center(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(
+                              maxWidth: 5e2,
+                            ),
+                            child: Column(
+                              children: [
+                                if (type != MathKeyboardType.numberOnly)
+                                  _Variables(
+                                    controller: controller,
+                                    variables: variables,
+                                  ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 4,
+                                  ),
+                                  child: _Buttons(
+                                    controller: controller,
+                                    page1: type == MathKeyboardType.numberOnly
+                                        ? numberKeyboard
+                                        : standardKeyboard,
+                                    page2: type == MathKeyboardType.numberOnly
+                                        ? null
+                                        : functionKeyboard,
+                                    onSubmit: onSubmit,
+                                  ),
                                 ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 4,
-                                ),
-                                child: _Buttons(
-                                  controller: controller,
-                                  page1: type == MathKeyboardType.numberOnly
-                                      ? numberKeyboard
-                                      : standardKeyboard,
-                                  page2: type == MathKeyboardType.numberOnly
-                                      ? null
-                                      : functionKeyboard,
-                                  onSubmit: onSubmit,
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -132,8 +140,8 @@ class MathKeyboard extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -249,7 +257,7 @@ class _Variables extends StatelessWidget {
         animation: controller,
         builder: (context, child) {
           return Scrollbar(
-            isAlwaysShown: true,
+            thumbVisibility: true,
             controller: scrollController,
             scrollbarOrientation: ScrollbarOrientation.bottom,
             child: ListView.separated(
@@ -373,7 +381,7 @@ class _Buttons extends StatelessWidget {
           final layout =
               controller.secondPage ? page2! : page1 ?? numberKeyboard;
           return Scrollbar(
-            isAlwaysShown: true,
+            thumbVisibility: true,
             controller: scrollController,
             scrollbarOrientation: ScrollbarOrientation.bottom,
             child: SingleChildScrollView(
