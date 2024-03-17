@@ -166,6 +166,22 @@ final functionKeyboard = [
       label: '∞',
       value: r' \infty ',
     ),
+    const BasicKeyboardButtonConfig(
+      label: 'mm',
+      value: r' \,mm ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'cm',
+      value: r' \,cm ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'm',
+      value: r' \,m ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'km',
+      value: r' \,km ',
+    ),
   ],
   [
     const BasicKeyboardButtonConfig(
@@ -221,6 +237,18 @@ final functionKeyboard = [
       label: '↔',
       value: r' \leftrightarrow ',
     ),
+    const BasicKeyboardButtonConfig(
+      label: 's',
+      value: r' \,s ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'min',
+      value: r' \,min ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'hr',
+      value: r' \,hr ',
+    ),
   ],
   [
     const BasicKeyboardButtonConfig(
@@ -261,6 +289,30 @@ final functionKeyboard = [
     const BasicKeyboardButtonConfig(
       label: '±',
       value: r' \pm ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'mg',
+      value: r' \,mg ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'g',
+      value: r' \,g ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'kg',
+      value: r' \,kg ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'ml',
+      value: r' \,ml ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'cl',
+      value: r' \,cl ',
+    ),
+    const BasicKeyboardButtonConfig(
+      label: 'l',
+      value: r' \,l ',
     ),
   ],
   [
