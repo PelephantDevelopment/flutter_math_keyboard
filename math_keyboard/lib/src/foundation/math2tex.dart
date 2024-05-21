@@ -114,9 +114,9 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
     }
     // Wrap with parentheses to keep precedence.
     return [
-      //TeXLeaf('('),
+      TeXLeaf('('),
       ...result,
-      //TeXLeaf(')'),
+      TeXLeaf(')'),
     ];
   }
   if (mathExpression is Literal) {
