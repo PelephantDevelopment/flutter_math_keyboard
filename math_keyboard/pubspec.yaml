@@ -7,7 +7,7 @@ homepage: https://github.com/simpleclub/math_keyboard/tree/main/math_keyboard
 publish_to: none
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=2.0.0"
 
 dependencies:
@@ -16,18 +16,17 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  #flutter_math_fork: ^0.6.3+1
   flutter_math_fork:
     git:
       url: https://github.com/PelephantDevelopment/flutter_math_fork
-      ref: 5055bc14ba604410daa29e7b950d500c9d0679a0
+      ref: 4164fdf4
   holding_gesture: ^1.1.0
-  intl: ^0.19.0
+  intl: ^0.20.2
   #math_expressions: ^2.1.0
   math_expressions:
     git:
       url: https://github.com/PelephantDevelopment/math-expressions
-      ref: 312d3d8645cde3534a76f6a92aa2a170f923ae83
+      ref: 42bae935
   petitparser: ^5.0.0
 
 dev_dependencies:
